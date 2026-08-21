@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ cinema.nom }} - CineGroupe{% endblock %}
+
+{% block body %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="{{ path('app_home') }}">Accueil</a></li>
+            <li class="breadcrumb-item active">{{ cinema.nom }}</li>
+        </ol>
+    </nav>
+
+    <h1>{{ cinema.nom }}</h1>
+    <p class="text-muted">{{ cinema.adresseComplete }}</p>
+
+    <h2 class="h4 mt-4">Films programmes aujourd'hui ({{ "now"|date('d/m/Y') }})</h2>
+
+    {% if films is empty %}
+        <p class="text-muted">Aucun film programme aujourd'hui dans ce cinema.</p>
+    {% endif %}
+
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+        {% for film in films %}
+            <div class="col">
+                <div class="card h-100">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ film.titre }} <small class="text-muted">({{ film.annee }})</small></h5>
+                        <p class="card-text"><span class="badge text-bg-info">{{ film.genre }}</span></p>
+                        <ul class="list-group list-group-flush">
+                            {% for seance in seancesParFilm[film.id] %}
+                                <li class="list-group-item d-flex justify-content-between align-items-center">
+                                    <span>Salle {{ seance.salle.numero }} &mdash; {{ seance.horaire.heureDebut|date('H:i') }}</span>
+                                    <span class="badge text-bg-secondary">{{ seance.tarif }} &euro;</span>
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

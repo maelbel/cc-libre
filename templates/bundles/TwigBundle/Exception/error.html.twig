@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Erreur{% endblock %}
+
+{% block body %}
+    <div class="text-center py-5">
+        <h1 class="display-4">{{ status_code }}</h1>
+        <p class="lead">{{ status_text }}</p>
+        <a href="{{ path('app_home') }}" class="btn btn-primary">Retour a l'accueil</a>
+    </div>
+{% endblock %}

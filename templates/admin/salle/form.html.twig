@@ -1,0 +1,16 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block admin_body %}
+    <h1 class="h3 mb-3">{{ isNew ? 'Nouvelle salle' : 'Modifier la salle' }}</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.cinema) }}
+        {{ form_row(form.numero) }}
+        {{ form_row(form.capacite) }}
+        {{ form_row(form.dateConstruction) }}
+        <div class="mt-3">
+            {{ form_widget(form.submit) }}
+            <a href="{{ path('admin_salle_index') }}" class="btn btn-outline-secondary">Annuler</a>
+        </div>
+    {{ form_end(form) }}
+{% endblock %}

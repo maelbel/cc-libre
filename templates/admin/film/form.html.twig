@@ -1,0 +1,15 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block admin_body %}
+    <h1 class="h3 mb-3">{{ isNew ? 'Nouveau film' : 'Modifier le film' }}</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.titre) }}
+        {{ form_row(form.annee) }}
+        {{ form_row(form.genre) }}
+        <div class="mt-3">
+            {{ form_widget(form.submit) }}
+            <a href="{{ path('admin_film_index') }}" class="btn btn-outline-secondary">Annuler</a>
+        </div>
+    {{ form_end(form) }}
+{% endblock %}

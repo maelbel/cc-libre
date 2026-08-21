@@ -1,0 +1,55 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block admin_body %}
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="h3 mb-0">Salles</h1>
+        <a href="{{ path('admin_salle_new') }}" class="btn btn-primary">+ Nouvelle salle</a>
+    </div>
+
+    <form method="get" class="row g-2 mb-3">
+        <div class="col-12 col-md-8">
+            <input type="search" name="search" value="{{ search }}" class="form-control" placeholder="Rechercher par cinema">
+        </div>
+        <div class="col-12 col-md-2 d-grid">
+            <button type="submit" class="btn btn-outline-secondary">Rechercher</button>
+        </div>
+    </form>
+
+    <div class="table-responsive">
+        <table class="table table-striped align-middle">
+            <thead>
+            <tr>
+                <th>Cinema</th>
+                <th>N&deg; salle</th>
+                <th>Capacite</th>
+                <th>Construction</th>
+                <th class="text-end">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for salle in pagination %}
+                <tr>
+                    <td>{{ salle.cinema.nom }}</td>
+                    <td>{{ salle.numero }}</td>
+                    <td>{{ salle.capacite }} places</td>
+                    <td>{{ salle.dateConstruction ? salle.dateConstruction|date('d/m/Y') : '' }}</td>
+                    <td class="text-end">
+                        <a href="{{ path('admin_salle_edit', {id: salle.id}) }}" class="btn btn-sm btn-outline-secondary">Modifier</a>
+                        <form action="{{ path('admin_salle_delete', {id: salle.id}) }}" method="post" class="d-inline"
+                              onsubmit="return confirm('Supprimer cette salle ?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete_salle_' ~ salle.id) }}">
+                            <button type="submit" class="btn btn-sm btn-outline-danger">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            {% else %}
+                <tr><td colspan="5" class="text-center text-muted">Aucune salle.</td></tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock %}

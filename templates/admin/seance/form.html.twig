@@ -1,0 +1,21 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block admin_body %}
+    <h1 class="h3 mb-3">{{ isNew ? 'Nouvelle seance' : 'Modifier la seance' }}</h1>
+
+    {{ form_start(form) }}
+        {{ form_row(form.film) }}
+        {{ form_row(form.salle) }}
+        {{ form_row(form.date) }}
+        {{ form_row(form.tarif) }}
+        <fieldset class="border rounded p-3 mb-3">
+            <legend class="h6">Horaire</legend>
+            {{ form_row(form.horaire.heureDebut) }}
+            {{ form_row(form.horaire.heureFin) }}
+        </fieldset>
+        <div class="mt-3">
+            {{ form_widget(form.submit) }}
+            <a href="{{ path('admin_seance_index') }}" class="btn btn-outline-secondary">Annuler</a>
+        </div>
+    {{ form_end(form) }}
+{% endblock %}

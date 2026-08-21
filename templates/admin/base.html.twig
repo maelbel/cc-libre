@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Administration - {{ parent() }}{% endblock %}
+
+{% block body %}
+    <div class="row">
+        <aside class="col-12 col-md-3 mb-3">
+            <div class="list-group">
+                <a href="{{ path('admin_cinema_index') }}"
+                   class="list-group-item list-group-item-action {{ app.request.get('_route') starts with 'admin_cinema' ? 'active' : '' }}">
+                    Cinemas
+                </a>
+                <a href="{{ path('admin_salle_index') }}"
+                   class="list-group-item list-group-item-action {{ app.request.get('_route') starts with 'admin_salle' ? 'active' : '' }}">
+                    Salles
+                </a>
+                <a href="{{ path('admin_film_index') }}"
+                   class="list-group-item list-group-item-action {{ app.request.get('_route') starts with 'admin_film' ? 'active' : '' }}">
+                    Films
+                </a>
+                <a href="{{ path('admin_seance_index') }}"
+                   class="list-group-item list-group-item-action {{ app.request.get('_route') starts with 'admin_seance' ? 'active' : '' }}">
+                    Seances
+                </a>
+            </div>
+        </aside>
+        <section class="col-12 col-md-9">
+            {% block admin_body %}{% endblock %}
+        </section>
+    </div>
+{% endblock %}

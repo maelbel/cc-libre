@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Verifiez vos emails{% endblock %}
+
+{% block body %}
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-6 col-lg-5 text-center">
+            <h1 class="h3 mb-3">Verifiez votre boite mail</h1>
+            <p>
+                Si un compte existe pour cette adresse, un email vient de vous etre envoye avec un lien
+                de reinitialisation, valable
+                {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.
+            </p>
+            <a href="{{ path('app_login') }}" class="btn btn-outline-primary">Retour a la connexion</a>
+        </div>
+    </div>
+{% endblock %}

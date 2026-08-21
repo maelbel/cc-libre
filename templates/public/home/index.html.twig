@@ -1,0 +1,79 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil - CineGroupe{% endblock %}
+
+{% block body %}
+    <h1 class="mb-4">Nos cinemas</h1>
+
+    <form method="get" class="row g-2 mb-4">
+        <div class="col-12 col-md-5">
+            <input type="search" name="q" value="{{ cinemaSearch }}" class="form-control"
+                   placeholder="Rechercher un cinema (nom ou ville)">
+        </div>
+        <div class="col-12 col-md-5">
+            <input type="search" name="film" value="{{ filmSearch }}" class="form-control"
+                   placeholder="Rechercher un film">
+        </div>
+        <div class="col-12 col-md-2 d-grid">
+            <button type="submit" class="btn btn-primary">Rechercher</button>
+        </div>
+    </form>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mb-5">
+        {% for cinema in cinemas %}
+            <div class="col">
+                <div class="card h-100 shadow-sm">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ cinema.nom }}</h5>
+                        <p class="card-text text-muted">{{ cinema.adresseComplete }}</p>
+                        {% set seancesCinema = seancesParCinema[cinema.id] ?? [] %}
+                        <p class="card-text"><span class="badge text-bg-secondary">{{ seancesCinema|length }} seance(s) aujourd'hui</span></p>
+                    </div>
+                    <div class="card-footer bg-white border-0">
+                        <a href="{{ path('app_cinema_show', {id: cinema.id}) }}" class="btn btn-outline-primary w-100">
+                            Voir les seances
+                        </a>
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="col-12">
+                <p class="text-muted">Aucun cinema ne correspond a votre recherche.</p>
+            </div>
+        {% endfor %}
+    </div>
+
+    <h2 class="mb-3">Seances disponibles aujourd'hui{% if filmSearch %} pour "{{ filmSearch }}"{% endif %}</h2>
+
+    {% if seancesParCinema is empty %}
+        <p class="text-muted">Aucune seance disponible pour le moment.</p>
+    {% endif %}
+
+    {% for cinemaId, seances in seancesParCinema %}
+        <div class="mb-4">
+            <h3 class="h5">{{ seances[0].salle.cinema.nom }}</h3>
+            <div class="table-responsive">
+                <table class="table table-striped align-middle">
+                    <thead>
+                    <tr>
+                        <th>Film</th>
+                        <th>Salle</th>
+                        <th>Horaire</th>
+                        <th>Tarif</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for seance in seances %}
+                        <tr>
+                            <td>{{ seance.film.titre }}</td>
+                            <td>Salle {{ seance.salle.numero }}</td>
+                            <td>{{ seance.horaire.heureDebut|date('H:i') }} - {{ seance.horaire.heureFin|date('H:i') }}</td>
+                            <td>{{ seance.tarif }} &euro;</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

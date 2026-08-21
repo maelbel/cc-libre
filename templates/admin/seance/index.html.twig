@@ -1,0 +1,57 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block admin_body %}
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="h3 mb-0">Seances</h1>
+        <a href="{{ path('admin_seance_new') }}" class="btn btn-primary">+ Nouvelle seance</a>
+    </div>
+
+    <form method="get" class="row g-2 mb-3">
+        <div class="col-12 col-md-8">
+            <input type="search" name="search" value="{{ search }}" class="form-control" placeholder="Rechercher par film ou cinema">
+        </div>
+        <div class="col-12 col-md-2 d-grid">
+            <button type="submit" class="btn btn-outline-secondary">Rechercher</button>
+        </div>
+    </form>
+
+    <div class="table-responsive">
+        <table class="table table-striped align-middle">
+            <thead>
+            <tr>
+                <th>Film</th>
+                <th>Cinema / Salle</th>
+                <th>Date</th>
+                <th>Horaire</th>
+                <th>Tarif</th>
+                <th class="text-end">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for seance in pagination %}
+                <tr>
+                    <td>{{ seance.film.titre }}</td>
+                    <td>{{ seance.salle.cinema.nom }} - Salle {{ seance.salle.numero }}</td>
+                    <td>{{ seance.date|date('d/m/Y') }}</td>
+                    <td>{{ seance.horaire.heureDebut|date('H:i') }} - {{ seance.horaire.heureFin|date('H:i') }}</td>
+                    <td>{{ seance.tarif }} &euro;</td>
+                    <td class="text-end">
+                        <a href="{{ path('admin_seance_edit', {id: seance.id}) }}" class="btn btn-sm btn-outline-secondary">Modifier</a>
+                        <form action="{{ path('admin_seance_delete', {id: seance.id}) }}" method="post" class="d-inline"
+                              onsubmit="return confirm('Supprimer cette seance ?');">
+                            <input type="hidden" name="_token" value="{{ csrf_token('delete_seance_' ~ seance.id) }}">
+                            <button type="submit" class="btn btn-sm btn-outline-danger">Supprimer</button>
+                        </form>
+                    </td>
+                </tr>
+            {% else %}
+                <tr><td colspan="6" class="text-center text-muted">Aucune seance.</td></tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        {{ knp_pagination_render(pagination) }}
+    </div>
+{% endblock %}

@@ -1,0 +1,13 @@
+<p>Bonjour,</p>
+
+<p>Pour reinitialiser votre mot de passe administrateur CineGroupe, cliquez sur le lien ci-dessous :</p>
+
+<p>
+    <a href="{{ url('app_reset_password', {token: resetToken.token}) }}">
+        Reinitialiser mon mot de passe
+    </a>
+</p>
+
+<p>Ce lien expirera {{ resetToken.expirationMessageKey|trans(resetToken.expirationMessageData, 'ResetPasswordBundle') }}.</p>
+
+<p>Si vous n'etes pas a l'origine de cette demande, ignorez simplement cet email.</p>

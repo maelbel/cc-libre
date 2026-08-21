@@ -1,0 +1,21 @@
+parameters:
+
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    App\:
+        resource: '../src/'
+        exclude:
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+
+    # Bind each service interface (Dependency Inversion Principle) to its
+    # concrete implementation so controllers/tests can type-hint against the
+    # interface only.
+    App\Service\Contract\CinemaServiceInterface: '@App\Service\CinemaService'
+    App\Service\Contract\SalleServiceInterface: '@App\Service\SalleService'
+    App\Service\Contract\FilmServiceInterface: '@App\Service\FilmService'
+    App\Service\Contract\SeanceServiceInterface: '@App\Service\SeanceService'
