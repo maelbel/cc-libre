@@ -53,7 +53,7 @@
         <div class="mb-4">
             <h3 class="h5">{{ seances[0].salle.cinema.nom }}</h3>
             <div class="table-responsive">
-                <table class="table table-striped align-middle">
+                <table class="table table-striped align-middle table-mobile-cards">
                     <thead>
                     <tr>
                         <th>Film</th>
@@ -65,10 +65,10 @@
                     <tbody>
                     {% for seance in seances %}
                         <tr>
-                            <td>{{ seance.film.titre }}</td>
-                            <td>Salle {{ seance.salle.numero }}</td>
-                            <td>{{ seance.horaire.heureDebut|date('H:i') }} - {{ seance.horaire.heureFin|date('H:i') }}</td>
-                            <td>{{ seance.tarif }} &euro;</td>
+                            <td data-label="Film">{{ seance.film.titre }}</td>
+                            <td data-label="Salle">Salle {{ seance.salle.numero }}</td>
+                            <td data-label="Horaire">{{ seance.horaire.heureDebut|date('H:i') }} - {{ seance.horaire.heureFin|date('H:i') }}</td>
+                            <td data-label="Tarif">{{ seance.tarif }} &euro;</td>
                         </tr>
                     {% endfor %}
                     </tbody>

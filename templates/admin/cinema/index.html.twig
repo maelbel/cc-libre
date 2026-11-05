@@ -16,7 +16,7 @@
     </form>
 
     <div class="table-responsive">
-        <table class="table table-striped align-middle">
+        <table class="table table-striped align-middle table-mobile-cards">
             <thead>
             <tr>
                 <th>Nom</th>
@@ -29,21 +29,23 @@
             <tbody>
             {% for cinema in pagination %}
                 <tr>
-                    <td>{{ cinema.nom }}</td>
-                    <td>{{ cinema.ville }}</td>
-                    <td>{{ cinema.adresseComplete }}</td>
-                    <td>{{ cinema.salles|length }}</td>
-                    <td class="text-end">
-                        <a href="{{ path('admin_cinema_edit', {id: cinema.id}) }}" class="btn btn-sm btn-outline-secondary">Modifier</a>
-                        <form action="{{ path('admin_cinema_delete', {id: cinema.id}) }}" method="post" class="d-inline"
-                              onsubmit="return confirm('Supprimer ce cinema et toutes ses salles/seances ?');">
-                            <input type="hidden" name="_token" value="{{ csrf_token('delete_cinema_' ~ cinema.id) }}">
-                            <button type="submit" class="btn btn-sm btn-outline-danger">Supprimer</button>
-                        </form>
+                    <td data-label="Nom">{{ cinema.nom }}</td>
+                    <td data-label="Ville">{{ cinema.ville }}</td>
+                    <td data-label="Adresse">{{ cinema.adresseComplete }}</td>
+                    <td data-label="Salles">{{ cinema.salles|length }}</td>
+                    <td class="text-end" data-label="Actions">
+                        <div class="d-flex gap-2 flex-wrap justify-content-end action-buttons">
+                            <a href="{{ path('admin_cinema_edit', {id: cinema.id}) }}" class="btn btn-sm btn-outline-secondary">Modifier</a>
+                            <form action="{{ path('admin_cinema_delete', {id: cinema.id}) }}" method="post" class="d-inline"
+                                  onsubmit="return confirm('Supprimer ce cinema et toutes ses salles/seances ?');">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete_cinema_' ~ cinema.id) }}">
+                                <button type="submit" class="btn btn-sm btn-outline-danger w-100">Supprimer</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
             {% else %}
-                <tr><td colspan="5" class="text-center text-muted">Aucun cinema.</td></tr>
+                <tr class="empty-row"><td colspan="5" class="text-center text-muted">Aucun cinema.</td></tr>
             {% endfor %}
             </tbody>
         </table>

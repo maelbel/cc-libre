@@ -1,0 +1,442 @@
+/* CineGroupe — theme de lecture (contraste eleve, hierarchie typographique) */
+
+:root {
+  --cg-navy: #14142B;
+  --cg-navy-light: #1F1F3D;
+  --cg-gold: #D4A017;
+  --cg-gold-dark: #9c7811;
+  --cg-bg: #FBFAF6;
+  --cg-surface: #FFFFFF;
+  --cg-text: #14142B;
+  --cg-text-muted: #5B5B72;
+  --cg-border: #E3E1DA;
+}
+
+/* Typographie */
+body {
+  font-family: 'IBM Plex Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Arial, sans-serif;
+  background-color: var(--cg-bg);
+  color: var(--cg-text);
+  font-size: 1.05rem;
+  line-height: 1.65;
+}
+
+h1, h2, h3, h4, .navbar-brand {
+  font-family: 'Oswald', 'IBM Plex Sans', Arial, sans-serif;
+  font-weight: 700;
+  color: var(--cg-text);
+  letter-spacing: 0.01em;
+}
+
+h1 { font-size: 2.1rem; margin-bottom: 1rem; }
+h2 { font-size: 1.55rem; margin-top: 2.25rem; margin-bottom: 1rem; }
+h3 { font-size: 1.2rem; }
+
+p { color: var(--cg-text); }
+.text-muted { color: var(--cg-text-muted) !important; }
+
+a { color: var(--cg-navy); }
+a:hover { color: var(--cg-gold-dark); }
+
+/* Barre de navigation */
+.navbar {
+  background-color: var(--cg-navy) !important;
+  box-shadow: 0 2px 10px rgba(20, 20, 43, 0.18);
+  padding-top: 0.85rem;
+  padding-bottom: 0.85rem;
+}
+.navbar-brand {
+  color: var(--cg-gold) !important;
+  font-size: 1.4rem;
+  letter-spacing: 0.03em;
+}
+.navbar-dark .navbar-nav .nav-link {
+  color: #D9D9E6;
+  font-weight: 500;
+  padding: 0.55rem 1rem !important;
+  border-radius: 8px;
+  transition: background-color .15s ease, color .15s ease;
+}
+.navbar-dark .navbar-nav .nav-link:hover {
+  color: #FBFAF6;
+  background-color: rgba(212, 160, 23, 0.16);
+}
+.navbar-dark .navbar-nav .nav-link.disabled {
+  color: var(--cg-gold) !important;
+  opacity: 1;
+}
+
+/* Boutons */
+.btn {
+  border-radius: 8px;
+  font-weight: 600;
+  padding: 0.55rem 1.15rem;
+}
+.btn-primary {
+  background-color: var(--cg-navy);
+  border-color: var(--cg-navy);
+}
+.btn-primary:hover, .btn-primary:focus {
+  background-color: #23234a;
+  border-color: #23234a;
+}
+.btn-outline-primary {
+  color: var(--cg-navy);
+  border-color: var(--cg-navy);
+}
+.btn-outline-primary:hover {
+  background-color: var(--cg-navy);
+  border-color: var(--cg-navy);
+  color: #fff;
+}
+.btn-outline-secondary {
+  border-color: var(--cg-border);
+  color: var(--cg-text-muted);
+}
+.btn:focus-visible,
+.form-control:focus,
+.form-select:focus,
+.form-check-input:focus {
+  box-shadow: 0 0 0 0.2rem rgba(212, 160, 23, 0.45) !important;
+  border-color: var(--cg-gold) !important;
+}
+
+/* Cartes */
+.card {
+  border: 1px solid var(--cg-border);
+  border-radius: 12px;
+  border-top: 3px solid var(--cg-gold);
+  transition: box-shadow .15s ease, transform .15s ease;
+}
+.card.shadow-sm:hover {
+  box-shadow: 0 12px 28px rgba(20, 20, 43, 0.12) !important;
+  transform: translateY(-2px);
+}
+.card-title {
+  font-weight: 700;
+  color: var(--cg-text);
+}
+
+/* Badges */
+.badge.text-bg-secondary {
+  background-color: var(--cg-navy-light) !important;
+  color: #FBFAF6 !important;
+}
+.badge.text-bg-info {
+  background-color: var(--cg-gold) !important;
+  color: var(--cg-navy) !important;
+}
+
+/* Tableaux */
+.table {
+  background-color: var(--cg-surface);
+}
+.table thead th {
+  background-color: var(--cg-navy);
+  color: #FBFAF6;
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.82rem;
+  letter-spacing: 0.04em;
+  border: none;
+  white-space: nowrap;
+}
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+  background-color: #F5F3EC;
+}
+.table td, .table th {
+  padding: 0.9rem 1rem;
+  vertical-align: middle;
+}
+
+/* Formulaires */
+.form-label {
+  font-weight: 600;
+  color: var(--cg-text);
+  margin-bottom: 0.4rem;
+}
+.form-control, .form-select {
+  border-radius: 8px;
+  border-color: var(--cg-border);
+  padding: 0.6rem 0.9rem;
+}
+
+/* Barre laterale admin */
+.list-group-item-action {
+  border: none;
+  border-left: 3px solid transparent;
+  border-radius: 0 !important;
+  font-weight: 500;
+  color: var(--cg-text);
+  padding: 0.75rem 1.1rem;
+}
+.list-group-item-action.active {
+  background-color: rgba(212, 160, 23, 0.14) !important;
+  border-left-color: var(--cg-gold);
+  color: var(--cg-navy) !important;
+  font-weight: 700;
+}
+.list-group-item-action:hover:not(.active) {
+  background-color: #F5F3EC;
+}
+
+/* Pied de page */
+.site-footer {
+  background-color: var(--cg-navy) !important;
+  color: #B9B9C9 !important;
+}
+.site-footer .text-muted {
+  color: #B9B9C9 !important;
+}
+
+/* Pagination (KnpPaginator) */
+.pagination .page-link {
+  color: var(--cg-navy);
+  border-color: var(--cg-border);
+  border-radius: 8px;
+  margin: 0 2px;
+}
+.pagination .page-item.active .page-link {
+  background-color: var(--cg-navy);
+  border-color: var(--cg-navy);
+}
+
+/* Alertes */
+.alert {
+  border-radius: 10px;
+  border: none;
+}
+.alert-danger { background-color: #FBE7E7; color: #7A1F1F; }
+.alert-success { background-color: #E8F3E6; color: #1F5C2E; }
+.alert-warning { background-color: #FBF3DA; color: #6B4E06; }
+.alert-info { background-color: #E6EEF5; color: #1F3E5C; }
+
+/* Fil d'Ariane */
+.breadcrumb {
+  background: none;
+  padding-left: 0;
+}
+
+/* ===================================================================
+   Mobile UX improvements
+   =================================================================== */
+
+/* Responsive heading scale: avoids oversized titles cramming narrow screens */
+h1 { font-size: clamp(1.5rem, 1.1rem + 2vw, 2.1rem); }
+h2 { font-size: clamp(1.25rem, 1rem + 1.2vw, 1.55rem); }
+
+/* Admin sidebar nav: vertical list on desktop, horizontal scrollable
+   pill bar on mobile so it doesn't push page content far down the screen. */
+@media (max-width: 767.98px) {
+  .admin-nav {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    gap: 0.4rem;
+    margin-bottom: 0.75rem;
+  }
+  .admin-nav .list-group-item-action {
+    flex: 1 1 0;
+    min-width: 0;
+    text-align: center;
+    border-radius: 999px !important;
+    border: 1px solid var(--cg-border) !important;
+    padding: 0.5rem 0.3rem;
+    font-size: 0.82rem;
+    font-weight: 600;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .admin-nav .list-group-item-action.active {
+    background-color: var(--cg-navy) !important;
+    color: #FBFAF6 !important;
+    border-color: var(--cg-navy) !important;
+  }
+}
+
+/* Bigger, easier-to-tap buttons on small screens (44px-ish touch target) */
+@media (max-width: 767.98px) {
+  .btn-sm {
+    padding: 0.5rem 0.9rem;
+    font-size: 0.95rem;
+  }
+  .action-buttons {
+    flex-direction: column;
+    align-items: stretch !important;
+  }
+  .action-buttons .btn {
+    width: 100%;
+  }
+}
+
+/* Pagination wraps instead of overflowing on narrow screens */
+@media (max-width: 575.98px) {
+  .pagination {
+    flex-wrap: wrap;
+    justify-content: center;
+    row-gap: 0.4rem;
+  }
+  .pagination .page-link {
+    padding: 0.45rem 0.65rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Data tables become stacked cards below the md breakpoint: no more
+   horizontal scrolling to read a row or reach its action buttons. */
+@media (max-width: 767.98px) {
+  .table-mobile-cards,
+  .table-mobile-cards tbody,
+  .table-mobile-cards tr,
+  .table-mobile-cards td {
+    display: block;
+    width: 100%;
+  }
+  .table-mobile-cards thead {
+    display: none;
+  }
+  .table-mobile-cards tr {
+    margin-bottom: 1rem;
+    border: 1px solid var(--cg-border);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(20, 20, 43, 0.06);
+    background-color: var(--cg-surface);
+  }
+  .table-mobile-cards tr.empty-row {
+    text-align: center;
+    padding: 1rem;
+    color: var(--cg-text-muted);
+  }
+  .table-mobile-cards td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.65rem 1rem;
+    border: none;
+    border-bottom: 1px solid var(--cg-border);
+    text-align: right;
+  }
+  .table-mobile-cards td:last-child {
+    border-bottom: none;
+  }
+  .table-mobile-cards td::before {
+    content: attr(data-label);
+    font-weight: 600;
+    color: var(--cg-text-muted);
+    text-align: left;
+    flex-shrink: 0;
+  }
+  .table-mobile-cards td.text-end {
+    flex-direction: column;
+    align-items: stretch;
+    text-align: left;
+  }
+  .table-mobile-cards td.text-end::before {
+    margin-bottom: 0.5rem;
+  }
+}
+
+/* ===================================================================
+   Menu burger mobile
+   =================================================================== */
+
+/* Bouton toggler : cible tactile plus grande, identite visuelle de marque,
+   sans l'ombre bleue par defaut de Bootstrap au focus */
+.navbar-toggler {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(212, 160, 23, 0.45);
+  border-radius: 10px;
+  background-color: rgba(212, 160, 23, 0.1);
+  transition: background-color .15s ease, border-color .15s ease;
+}
+.navbar-toggler:hover {
+  background-color: rgba(212, 160, 23, 0.18);
+}
+.navbar-toggler:focus {
+  box-shadow: 0 0 0 3px rgba(212, 160, 23, 0.35);
+  outline: none;
+}
+
+/* Icone hamburger redessinee en CSS pur (une barre + deux pseudo-elements)
+   afin de pouvoir l'animer en croix via l'attribut [aria-expanded] que le
+   JS Collapse de Bootstrap bascule deja sur ce bouton : aucun JS supplementaire. */
+.navbar-toggler-icon {
+  background-image: none !important;
+  position: relative;
+  width: 22px;
+  height: 2px;
+  background-color: var(--cg-gold);
+  border-radius: 2px;
+  transition: background-color .15s ease;
+}
+.navbar-toggler-icon::before,
+.navbar-toggler-icon::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 22px;
+  height: 2px;
+  background-color: var(--cg-gold);
+  border-radius: 2px;
+  transition: transform .2s ease, top .2s ease, opacity .2s ease;
+}
+.navbar-toggler-icon::before { top: -7px; }
+.navbar-toggler-icon::after { top: 7px; }
+
+/* Etat ouvert : la barre centrale disparait, les deux autres forment la croix */
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+  background-color: transparent;
+}
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before {
+  top: 0;
+  transform: rotate(45deg);
+}
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after {
+  top: 0;
+  transform: rotate(-45deg);
+}
+
+/* Separateur entre les deux groupes de liens, visible uniquement dans
+   le menu deroulant mobile */
+.navbar-divider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.12);
+  margin: 0.5rem 0;
+}
+
+/* Panneau deroulant mobile : cibles tactiles plus confortables, separateurs
+   entre liens, et un badge distinct pour le nom d'utilisateur connecte
+   plutot qu'un lien desactive sans signification visuelle */
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    margin-top: 0.75rem;
+    padding-top: 0.5rem;
+  }
+  .navbar-nav .nav-item {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  }
+  .navbar-nav .nav-item:last-child {
+    border-bottom: none;
+  }
+  .navbar-dark .navbar-nav .nav-link {
+    padding: 0.85rem 0.5rem !important;
+    font-size: 1.05rem;
+  }
+  .navbar-nav .nav-link.disabled {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.6rem 0.9rem !important;
+    margin: 0.3rem 0;
+    background-color: rgba(212, 160, 23, 0.12);
+    border-radius: 999px;
+    font-size: 0.95rem;
+  }
+}

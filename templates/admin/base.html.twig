@@ -5,7 +5,7 @@
 {% block body %}
     <div class="row">
         <aside class="col-12 col-md-3 mb-3">
-            <div class="list-group">
+            <div class="list-group admin-nav">
                 <a href="{{ path('admin_cinema_index') }}"
                    class="list-group-item list-group-item-action {{ app.request.get('_route') starts with 'admin_cinema' ? 'active' : '' }}">
                     Cinemas

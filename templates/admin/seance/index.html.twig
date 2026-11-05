@@ -16,7 +16,7 @@
     </form>
 
     <div class="table-responsive">
-        <table class="table table-striped align-middle">
+        <table class="table table-striped align-middle table-mobile-cards">
             <thead>
             <tr>
                 <th>Film</th>
@@ -30,22 +30,24 @@
             <tbody>
             {% for seance in pagination %}
                 <tr>
-                    <td>{{ seance.film.titre }}</td>
-                    <td>{{ seance.salle.cinema.nom }} - Salle {{ seance.salle.numero }}</td>
-                    <td>{{ seance.date|date('d/m/Y') }}</td>
-                    <td>{{ seance.horaire.heureDebut|date('H:i') }} - {{ seance.horaire.heureFin|date('H:i') }}</td>
-                    <td>{{ seance.tarif }} &euro;</td>
-                    <td class="text-end">
-                        <a href="{{ path('admin_seance_edit', {id: seance.id}) }}" class="btn btn-sm btn-outline-secondary">Modifier</a>
-                        <form action="{{ path('admin_seance_delete', {id: seance.id}) }}" method="post" class="d-inline"
-                              onsubmit="return confirm('Supprimer cette seance ?');">
-                            <input type="hidden" name="_token" value="{{ csrf_token('delete_seance_' ~ seance.id) }}">
-                            <button type="submit" class="btn btn-sm btn-outline-danger">Supprimer</button>
-                        </form>
+                    <td data-label="Film">{{ seance.film.titre }}</td>
+                    <td data-label="Cinema / Salle">{{ seance.salle.cinema.nom }} - Salle {{ seance.salle.numero }}</td>
+                    <td data-label="Date">{{ seance.date|date('d/m/Y') }}</td>
+                    <td data-label="Horaire">{{ seance.horaire.heureDebut|date('H:i') }} - {{ seance.horaire.heureFin|date('H:i') }}</td>
+                    <td data-label="Tarif">{{ seance.tarif }} &euro;</td>
+                    <td class="text-end" data-label="Actions">
+                        <div class="d-flex gap-2 flex-wrap justify-content-end action-buttons">
+                            <a href="{{ path('admin_seance_edit', {id: seance.id}) }}" class="btn btn-sm btn-outline-secondary">Modifier</a>
+                            <form action="{{ path('admin_seance_delete', {id: seance.id}) }}" method="post" class="d-inline"
+                                  onsubmit="return confirm('Supprimer cette seance ?');">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete_seance_' ~ seance.id) }}">
+                                <button type="submit" class="btn btn-sm btn-outline-danger w-100">Supprimer</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
             {% else %}
-                <tr><td colspan="6" class="text-center text-muted">Aucune seance.</td></tr>
+                <tr class="empty-row"><td colspan="6" class="text-center text-muted">Aucune seance.</td></tr>
             {% endfor %}
             </tbody>
         </table>

@@ -16,7 +16,7 @@
     </form>
 
     <div class="table-responsive">
-        <table class="table table-striped align-middle">
+        <table class="table table-striped align-middle table-mobile-cards">
             <thead>
             <tr>
                 <th>Titre</th>
@@ -29,21 +29,23 @@
             <tbody>
             {% for film in pagination %}
                 <tr>
-                    <td>{{ film.titre }}</td>
-                    <td>{{ film.annee }}</td>
-                    <td>{{ film.genre }}</td>
-                    <td>{{ film.seances|length }}</td>
-                    <td class="text-end">
-                        <a href="{{ path('admin_film_edit', {id: film.id}) }}" class="btn btn-sm btn-outline-secondary">Modifier</a>
-                        <form action="{{ path('admin_film_delete', {id: film.id}) }}" method="post" class="d-inline"
-                              onsubmit="return confirm('Supprimer ce film et ses seances ?');">
-                            <input type="hidden" name="_token" value="{{ csrf_token('delete_film_' ~ film.id) }}">
-                            <button type="submit" class="btn btn-sm btn-outline-danger">Supprimer</button>
-                        </form>
+                    <td data-label="Titre">{{ film.titre }}</td>
+                    <td data-label="Annee">{{ film.annee }}</td>
+                    <td data-label="Genre">{{ film.genre }}</td>
+                    <td data-label="Seances">{{ film.seances|length }}</td>
+                    <td class="text-end" data-label="Actions">
+                        <div class="d-flex gap-2 flex-wrap justify-content-end action-buttons">
+                            <a href="{{ path('admin_film_edit', {id: film.id}) }}" class="btn btn-sm btn-outline-secondary">Modifier</a>
+                            <form action="{{ path('admin_film_delete', {id: film.id}) }}" method="post" class="d-inline"
+                                  onsubmit="return confirm('Supprimer ce film et ses seances ?');">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete_film_' ~ film.id) }}">
+                                <button type="submit" class="btn btn-sm btn-outline-danger w-100">Supprimer</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
             {% else %}
-                <tr><td colspan="5" class="text-center text-muted">Aucun film.</td></tr>
+                <tr class="empty-row"><td colspan="5" class="text-center text-muted">Aucun film.</td></tr>
             {% endfor %}
             </tbody>
         </table>

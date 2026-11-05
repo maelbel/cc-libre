@@ -16,7 +16,7 @@
     </form>
 
     <div class="table-responsive">
-        <table class="table table-striped align-middle">
+        <table class="table table-striped align-middle table-mobile-cards">
             <thead>
             <tr>
                 <th>Cinema</th>
@@ -29,21 +29,23 @@
             <tbody>
             {% for salle in pagination %}
                 <tr>
-                    <td>{{ salle.cinema.nom }}</td>
-                    <td>{{ salle.numero }}</td>
-                    <td>{{ salle.capacite }} places</td>
-                    <td>{{ salle.dateConstruction ? salle.dateConstruction|date('d/m/Y') : '' }}</td>
-                    <td class="text-end">
-                        <a href="{{ path('admin_salle_edit', {id: salle.id}) }}" class="btn btn-sm btn-outline-secondary">Modifier</a>
-                        <form action="{{ path('admin_salle_delete', {id: salle.id}) }}" method="post" class="d-inline"
-                              onsubmit="return confirm('Supprimer cette salle ?');">
-                            <input type="hidden" name="_token" value="{{ csrf_token('delete_salle_' ~ salle.id) }}">
-                            <button type="submit" class="btn btn-sm btn-outline-danger">Supprimer</button>
-                        </form>
+                    <td data-label="Cinema">{{ salle.cinema.nom }}</td>
+                    <td data-label="N&deg; salle">{{ salle.numero }}</td>
+                    <td data-label="Capacite">{{ salle.capacite }} places</td>
+                    <td data-label="Construction">{{ salle.dateConstruction ? salle.dateConstruction|date('d/m/Y') : '' }}</td>
+                    <td class="text-end" data-label="Actions">
+                        <div class="d-flex gap-2 flex-wrap justify-content-end action-buttons">
+                            <a href="{{ path('admin_salle_edit', {id: salle.id}) }}" class="btn btn-sm btn-outline-secondary">Modifier</a>
+                            <form action="{{ path('admin_salle_delete', {id: salle.id}) }}" method="post" class="d-inline"
+                                  onsubmit="return confirm('Supprimer cette salle ?');">
+                                <input type="hidden" name="_token" value="{{ csrf_token('delete_salle_' ~ salle.id) }}">
+                                <button type="submit" class="btn btn-sm btn-outline-danger w-100">Supprimer</button>
+                            </form>
+                        </div>
                     </td>
                 </tr>
             {% else %}
-                <tr><td colspan="5" class="text-center text-muted">Aucune salle.</td></tr>
+                <tr class="empty-row"><td colspan="5" class="text-center text-muted">Aucune salle.</td></tr>
             {% endfor %}
             </tbody>
         </table>

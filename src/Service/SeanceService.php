@@ -57,13 +57,22 @@ class SeanceService extends AbstractCrudService implements SeanceServiceInterfac
             return;
         }
 
+        $horaire = $entity->getHoraire();
+
+        // Compared by time range, not by Horaire id: a brand-new Seance's
+        // Horaire has no id yet (persisted only on flush, via cascade), and
+        // two distinct Horaire rows sharing the same range are still a
+        // conflict for the same salle/date.
         $conflicts = $this->seanceRepository->createQueryBuilder('s')
+            ->innerJoin('s.horaire', 'h')
             ->andWhere('s.salle = :salle')
             ->andWhere('s.date = :date')
-            ->andWhere('s.horaire = :horaire')
+            ->andWhere('h.heureDebut = :heureDebut')
+            ->andWhere('h.heureFin = :heureFin')
             ->setParameter('salle', $entity->getSalle())
             ->setParameter('date', $entity->getDate())
-            ->setParameter('horaire', $entity->getHoraire())
+            ->setParameter('heureDebut', $horaire?->getHeureDebut())
+            ->setParameter('heureFin', $horaire?->getHeureFin())
             ->getQuery()
             ->getResult();
 
