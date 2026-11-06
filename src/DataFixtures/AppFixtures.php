@@ -53,6 +53,58 @@ class AppFixtures extends Fixture
         $manager->persist($film1);
         $manager->persist($film2);
 
+        $extraFilms = [
+            ['Le Fabuleux Destin d\'Amelie Poulain', 2001, 'Comedie'],
+            ['Intouchables', 2011, 'Comedie'],
+            ['La Haine', 1995, 'Drame'],
+            ['Le Diner de cons', 1998, 'Comedie'],
+            ['Inception', 2010, 'Science-fiction'],
+            ['Interstellar', 2014, 'Science-fiction'],
+            ['The Dark Knight', 2008, 'Action'],
+            ['Pulp Fiction', 1994, 'Policier'],
+            ['Le Seigneur des anneaux : La Communaute de l\'anneau', 2001, 'Fantastique'],
+            ['Parasite', 2019, 'Thriller'],
+            ['Le Voyage de Chihiro', 2001, 'Animation'],
+            ['Mad Max: Fury Road', 2015, 'Action'],
+            ['La La Land', 2016, 'Comedie musicale'],
+            ['Whiplash', 2014, 'Drame'],
+            ['Les Visiteurs', 1993, 'Comedie'],
+            ['Le Grand Bleu', 1988, 'Drame'],
+            ['Leon', 1994, 'Thriller'],
+            ['Matrix', 1999, 'Science-fiction'],
+            ['Gladiator', 2000, 'Historique'],
+            ['Titanic', 1997, 'Romance'],
+            ['Jurassic Park', 1993, 'Aventure'],
+            ['Retour vers le futur', 1985, 'Science-fiction'],
+            ['Le Roi Lion', 1994, 'Animation'],
+            ['Toy Story', 1995, 'Animation'],
+            ['Alien', 1979, 'Horreur'],
+            ['Shining', 1980, 'Horreur'],
+            ['Get Out', 2017, 'Horreur'],
+            ['Dune', 2021, 'Science-fiction'],
+            ['Oppenheimer', 2023, 'Historique'],
+            ['Anatomie d\'une chute', 2023, 'Drame'],
+            ['Les Choristes', 2004, 'Drame'],
+            ['Bienvenue chez les Ch\'tis', 2008, 'Comedie'],
+            ['OSS 117 : Le Caire, nid d\'espions', 2006, 'Comedie'],
+            ['Le Bureau des legendes : le film', 2025, 'Espionnage'],
+            ['Les Intouchables du rail', 2024, 'Action'],
+            ['Ombres sur la Loire', 2025, 'Policier'],
+            ['Le Dernier Phare', 2024, 'Drame'],
+            ['Nuit blanche a Brest', 2025, 'Thriller'],
+            ['Les Gardiens de la foret', 2023, 'Aventure'],
+            ['Cosmos Express', 2024, 'Science-fiction'],
+            ['Un ete a Quiberon', 2025, 'Romance'],
+            ['La Revanche des crepes', 2024, 'Comedie'],
+            ['Le Secret du Mont', 2023, 'Fantastique'],
+            ['Brume', 2025, 'Horreur'],
+            ['Petits Pas', 2024, 'Animation'],
+        ];
+
+        foreach ($extraFilms as [$titre, $annee, $genre]) {
+            $manager->persist((new Film())->setTitre($titre)->setAnnee($annee)->setGenre($genre));
+        }
+
         $horaire1 = (new Horaire())->setHeureDebut(new \DateTimeImmutable('14:00'))->setHeureFin(new \DateTimeImmutable('16:00'));
         $horaire2 = (new Horaire())->setHeureDebut(new \DateTimeImmutable('20:30'))->setHeureFin(new \DateTimeImmutable('22:30'));
         $manager->persist($horaire1);
